@@ -1,3 +1,4 @@
+import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.Random;
 
@@ -186,11 +187,86 @@ public class TestDemo {
     }
 
 
+    private static int partition(int[] arr, int low, int high){
+
+        int i = low;
+        int tmp = arr[i];
+
+        while (low < high){
 
 
+            while (low < high && arr[high] >= tmp){
+
+                high--;
+
+            }
+
+
+
+            while (low < high && arr[low] <= tmp){
+
+                low++;
+
+            }
+            swap(arr, low, high);
+
+        }
+
+        swap(arr, low, i);
+
+        return low;
+
+    }
+
+
+    private static void quick(int[] arr, int left, int right){
+
+        if (left >= right) return;
+
+        int pivot = partition(arr, left, right);
+        quick(arr, left, pivot - 1);
+        quick(arr, pivot + 1, right);
+
+
+
+
+    }
+
+
+    public static void quickSort(int[] arr){
+
+         quick(arr, 0, arr.length- 1);
+
+
+    }
+
+
+
+    private static void swap(int[] arr, int a, int b){
+
+        int tmp = arr[a];
+        arr[a] = arr[b];
+        arr[b] = tmp;
+
+
+
+    }
 
 
     public static void main(String[] args) {
+
+
+        int[] arr = {2, 3, 5, 8, 7, 9, 10};
+        System.out.println("排序前" + Arrays.toString(arr));
+
+        quickSort(arr);
+        System.out.println("排序后" + Arrays.toString(arr));
+
+    }
+
+
+
+    public static void main1(String[] args) {
         int[] arr = new int[1_0000];
         int j = 0;
         Random random = new Random();
