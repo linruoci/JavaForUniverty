@@ -9,7 +9,7 @@
 public class TestDemo {
 
 
-    public static void main(String[] args) {
+    public static void main1(String[] args) {
 
         BinarySearchTree tmp = new BinarySearchTree();
 
@@ -20,10 +20,10 @@ public class TestDemo {
             tmp.insert(arr[i]);
 
         }
-        tmp.insert(8);
+        //tmp.insert(8);
 
-        BinarySearchTree.TreeNode ret = tmp.toFind(888);
-        System.out.println("找到：" + ret.key);
+
+        tmp.delete(5);
 
         System.out.println("fafafafa");
 

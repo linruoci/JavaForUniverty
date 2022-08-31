@@ -99,5 +99,103 @@ public class BinarySearchTree {
     }
 
 
+    public boolean delete(int data){
+
+        TreeNode cur = root;
+
+        TreeNode parent = null;
+
+        while (cur != null){
+
+            if (cur.key < data){
+
+                parent = cur;
+                cur = cur.right;
+            } else if (cur.key == data){
+
+                deleteNode(parent, cur);
+                return true;
+
+            } else {
+
+                parent = cur;
+                cur = cur.left;
+
+            }
+
+
+
+
+        }
+        return false;
+
+
+    }
+
+    private void deleteNode(TreeNode parent, TreeNode cur) {
+
+        if (cur.left == null){
+
+            if (cur == root){
+
+                root = cur.right;
+
+            } else if(parent.left == cur){
+
+                parent.left = cur.right;
+
+            } else {
+
+                parent.right = cur.right;
+
+            }
+
+        } else if (cur.right == null){
+            if (cur == root){
+
+                root = cur.left;
+
+            } else if (parent.left == cur){
+
+                parent.left = cur.left;
+            } else {
+
+                parent.right = cur.left;
+
+            }
+
+
+
+        } else {
+
+            TreeNode targetParent = cur;
+            TreeNode target = cur.right;
+
+            while (target.left != null){
+
+                targetParent = target;
+                target = target.left;
+
+
+            }
+
+            //到这里， target一定装的是cur右树的最小值。
+            cur.key = target.key;
+
+            if (targetParent.left == target){
+
+                targetParent.left = target.right;
+
+            } else {
+
+                targetParent.right = target.right;
+
+            }
+
+        }
+
+
+    }
+
 
 }
