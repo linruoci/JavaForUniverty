@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+
+
+    <!-- 另开标签页， 使用target = "_blank"-->
+    <a href="2.zip" >跳转到1.html</a>
+
+    <!-- 要是一些像zip文件会触发下载功能 -->
+
+
+    <hr>
+    <hr>
+    <hr>
+
+
+    <!-- cellspacing单元格空隙 -->
+    <table border = "1px" width = "500px" height = "600px" cellspacing = "0">
+
+        <tr>
+            <th>姓名</th>
+            <th>性别</th>
+            <th>电话</th>
+        </tr>
+        <tr>    
+            <td>张三</td>
+            <td>男</td>
+            <td>158</td>
+        </tr>
+        <tr>
+            <td>李四</td>
+            <td>女</td>
+            <td rowspan="2">196</td>
+        </tr>
+        <tr>
+            <td>王五</td>
+            <td>男</td>
+        </tr>
+
+    </table>
+
+
+    <hr color="red">
+    <hr color="green">
+    <hr color="orange">
+
+    <!-- 列表标签 分为有序列表和无序列表-->
+
+    <ol>
+        <li>
+            余华
+        </li>
+        <li>
+            鲁迅
+        </li>
+        <li>
+            罗翔
+        </li>
+        <li></li>
+    </ol>
+
+    <ul>
+
+        <li>余华</li>
+        <li>鲁迅</li>
+        <li>罗翔</li>
+    </ul>
+
+
+    <br><br><br>
+    <hr>
+    <hr>
+    <hr>
+    <hr>
+    <hr>
+
+    <!-- 表单标签 -->
+
+    <!-- form功能实现前后端交互 -->
+
+
+    <!-- input标签 -->
+
+    <input type="text">
+    <br>
+    <input type="password">
+    <br>
+    <!-- radio单选框， 如何实现单选？ 需要使用关键字 -->
+
+    <!-- 如果想点击文字也能选中， 用label标签 -->   
+    <!-- 如果想要默认选中一个，用checked -->
+    <input type="radio" name = "gender" id = "male"> <label for="male">男</label>
+    <input type="radio" name = "gender" id = "female" checked = "checked"> <label for="female">女</label>
+
+
+   <!-- 复选框 -->
+
+
+    <input type="checkbox"> 吃饭
+    <input type="checkbox"> 睡觉
+    <input type="checkbox"> 打豆豆
+
+    <!-- 按钮 -->
+
+    <input type="button" value = "这是一个按钮">
+
+
+    <!--文件选择器 -->
+    <input type="file">
+
+    <hr>
+    <hr>
+    <hr>
+    <hr>
+    <hr>
+
+    <select>
+
+        <option>beijing</option>
+        <option selected = "selected">shanghai</option>
+        <option>guangz</option>
+        <option>beijing</option>
+
+
+    </select>
+
+    <!--多行编辑框  -->
+
+    <textarea name="" id="" cols="30" rows="10"></textarea>
+
+</body>
+</html>
