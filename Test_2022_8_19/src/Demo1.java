@@ -11,8 +11,8 @@ public class Demo1 {
         BinaryTree binaryTree = new BinaryTree();
         BinaryTree.TreeNode node = binaryTree.createTree();
 
-        binaryTree.preOrder(node);
 
+        System.out.println(binaryTree.isCompleteTree(node));
 
     }
 

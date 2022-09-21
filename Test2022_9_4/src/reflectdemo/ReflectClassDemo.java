@@ -39,28 +39,25 @@ public class ReflectClassDemo {
 
 
         try {
-            Class<?> c3 = Class.forName("reflectdemo.Student");
+            Class<?> c1 = Class.forName("reflectdemo.Student");
+            Constructor<?> constructor = c1.getDeclaredConstructor(String.class, int.class);
+
+            constructor.setAccessible(true);
 
 
-            Constructor<?> t =  c3.getDeclaredConstructor(String.class, int.class);
-
-
-            t.setAccessible(true);
-            Student student = (Student)t.newInstance("ruoci", 18);
+            Student student = (Student)constructor.newInstance("ruoci", 18);
 
             System.out.println(student);
-
-            //通过反射获取一个学生对象
 
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         } catch (NoSuchMethodException e) {
             throw new RuntimeException(e);
-        } catch (InvocationTargetException e) {
-            throw new RuntimeException(e);
         } catch (InstantiationException e) {
             throw new RuntimeException(e);
         } catch (IllegalAccessException e) {
+            throw new RuntimeException(e);
+        } catch (InvocationTargetException e) {
             throw new RuntimeException(e);
         }
 
@@ -73,17 +70,17 @@ public class ReflectClassDemo {
         try {
             Class<?> c3 = Class.forName("reflectdemo.Student");
 
-
             Student student = (Student)c3.newInstance();
 
-            Field field = c3.getDeclaredField("name");
 
+            Field field = c3.getDeclaredField("name");
 
             field.setAccessible(true);
 
             field.set(student, "linruoci");
 
             System.out.println(student);
+
 
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
@@ -139,12 +136,12 @@ public class ReflectClassDemo {
 
 //        reflectNewInstance();
 //
-//        //reflectPrivateConstructor();
+//        reflectPrivateConstructor();
 //
 //        reflectPrivateField();
 
 
-        reflectPrivateMethod();
+        //reflectPrivateMethod();
 
     }
 
