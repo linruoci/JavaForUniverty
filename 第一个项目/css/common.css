@@ -97,6 +97,8 @@ html, body{
     background-color: rgba(255, 255, 255, 0.8);
     border-radius: 10px;
 
+    /* 如果内容超出范围， 在这个元素上加滚动条, 得设置到带有尺寸的元素上才能生效 */
+    overflow: auto;
 }
 
 .card{
