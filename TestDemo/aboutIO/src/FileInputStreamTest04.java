@@ -1,39 +1,43 @@
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.nio.charset.Charset;
-import java.util.Arrays;
 
 /**
  * @PROJECT_NAME: TestDemo
  * @DESCRIPTION:
  * @author: 帅哥
- * @DATE: 2022/10/7 16:15
+ * @DATE: 2022/10/7 17:11
  */
+public class FileInputStreamTest04 {
 
-
-public class FileInputStreamTest03 {
 
     public static void main(String[] args) {
 
         FileInputStream file = null;
-
         try {
             file = new FileInputStream("tempFile.txt");
-            byte[] bytes = new byte[4];
+            byte[] bytes = new byte[1024];
 
-            //成功读到的字节数。
-            int readCount = file.read(bytes);
+//            while (true){
+//
+//                int readCount = file.read(bytes);
+//
+//                if (readCount == -1){
+//                    break;
+//                }
+//
+//                System.out.print(new String(bytes, 0, readCount, "utf-8"));
+//
+//
+//            }
+            System.out.println("总字节数量>" + file.available());
+            int readCount = 0;
+            readCount = file.read();
             System.out.println(readCount);
-            System.out.println(new String(bytes, 0, readCount, "utf-8"));
-
-            readCount = file.read(bytes);
-            System.out.println(readCount);
-            System.out.println(new String(bytes, 0, readCount));
-
-
-            readCount = file.read(bytes);
-            System.out.println(readCount);
+//            while ((readCount = file.read()) != -1){
+//
+//                System.out.println(readCount);
+//
+//            }
 
 
 
@@ -56,6 +60,4 @@ public class FileInputStreamTest03 {
         }
 
     }
-
-
 }
