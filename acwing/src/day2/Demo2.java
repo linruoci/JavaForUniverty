@@ -105,20 +105,20 @@ public class Demo2 {
 
     private static boolean cmp(String a, String b){
 
-        if (a.length() > b.length()) return true;
+        if (a.length() != b.length()) return a.length() > b.length();
 
-        for (int i = 0; i < b.length(); i++){
+        for (int i = 0; i < a.length(); i++){
 
-            if (b.charAt(i) > a.charAt(i)){
+            if (b.charAt(i) != a.charAt(i)){
 
-                return false;
+                return a.charAt(i) > b.charAt(i);
+
             }
 
 
         }
 
         return true;
-
 
     }
 
