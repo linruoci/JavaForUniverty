@@ -18,7 +18,7 @@ public class ShowRequestServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        StringBuilder buffer = new StringBuilder();
+        StringBuffer buffer = new StringBuffer();
 
         buffer.append(req.getProtocol());
         buffer.append("<br>");
@@ -26,31 +26,26 @@ public class ShowRequestServlet extends HttpServlet {
         buffer.append(req.getMethod());
         buffer.append("<br>");
 
-
         buffer.append(req.getRequestURI());
         buffer.append("<br>");
 
-        buffer.append(req.getContextPath());
-        buffer.append("<br>");
 
         buffer.append(req.getQueryString());
         buffer.append("<br>");
 
-        Enumeration<String> headerNames = req.getHeaderNames();
 
+        Enumeration<String> headerNames = req.getHeaderNames();
 
         while (headerNames.hasMoreElements()){
 
-            String name = headerNames.nextElement();
+            String str = headerNames.nextElement();
 
-            buffer.append(name + ": " + req.getHeader(name));
-
+            buffer.append(str + ":" + req.getHeader(str));
             buffer.append("<br>");
-
         }
-
-        resp.setContentType("text/html; charset = utf8");
+        resp.setContentType("text/html; charset=utf8");
         resp.getWriter().write(buffer.toString());
+
 
     }
 
