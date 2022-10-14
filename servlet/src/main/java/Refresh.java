@@ -4,29 +4,24 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
-/**
- * @DATE: 2022/10/13 21:39
- * @PROJECT_NAME: servlet
- * @author: 帅哥
- * @DESCRIPTION:1
- */
 
-@WebServlet("/status")
-public class StatusServlet extends HttpServlet {
-
+@WebServlet("/refresh")
+public class Refresh extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        //设置状态码
-//        resp.setStatus(500);
+        resp.setHeader("refresh", "1");
 
-//        设置重定向第一种写法
-//        resp.setStatus(302);
-//
-//        resp.setHeader("location", "https://www.bilibili.com");
-//
+        Date date = new Date();
+
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        String now = format.format(date);
+
+        resp.getWriter().write(now);
 
 
     }
