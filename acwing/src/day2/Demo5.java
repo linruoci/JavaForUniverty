@@ -45,9 +45,13 @@ public class Demo5 {
         int[] array = new int[N];
         int[] s = new int[N];
 
-        for (int i = 1; i <= n; i++) array[i] = scan.nextInt();
+        for (int i = 1; i <= n; i++) {
+            array[i] = scan.nextInt();
+        }
 
-        for (int i = 1; i <= n; i++) s[i] = s[i - 1] + array[i];
+        for (int i = 1; i <= n; i++) {
+            s[i] = s[i - 1] + array[i];
+        }
 
 
         while (m-- > 0){

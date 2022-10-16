@@ -12,19 +12,19 @@ import java.util.Scanner;
  */
 public class Demo4 {
 
+    private static int rest;
     private static ArrayList<Integer> div(ArrayList<Integer> a, int b){
 
         ArrayList<Integer> c = new ArrayList<>();
 
-        int t = 0;
 
         for (int i = a.size() - 1; i >= 0; i--){
 
-            t = t * 10 + a.get(i);
+            rest = rest * 10 + a.get(i);
 
-            c.add(t / b);
+            c.add(rest / b);
 
-            t = t % b;
+            rest = rest % b;
 
         }
         Collections.reverse(c);
@@ -64,6 +64,8 @@ public class Demo4 {
             System.out.print(c.get(i));
 
         }
+        System.out.println();
+        System.out.println(rest);
 
 
     }

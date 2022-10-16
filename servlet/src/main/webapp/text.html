@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+
+<style>
+
+    .one{
+        font-size: 50px;
+    }
+
+</style>
+
+<body>
+
+    <div class = 'one'></div>
+
+    <button id = "doGet">Get</button>
+    <button id = "doPost">Post</button>
+
+    <button id = "doPut">Put</button>
+    <button id = "doDelete">Delete</button>
+    
+    <script src = "https://code.jquery.com/jquery-3.6.1.min.js"></script>
+    
+
+
+    <script>
+
+        let btnDoGet = document.querySelector('#doGet');
+
+        btnDoGet.onclick = function(){
+
+            $.ajax({
+                type:'get',
+                url:'love',
+
+                success: function(body){
+                    
+                    let tmp = document.querySelector('.one');
+
+                    tmp.innerHTML = body;
+
+
+                }
+                
+            })
+
+        }
+
+        let btnDoPost = document.querySelector('#doPost');
+
+        btnDoPost.onclick = function(){
+
+            $.ajax({
+                type:'post',
+                url:'love',
+
+                success: function(body){
+                    
+                    let tmp = document.querySelector('.one');
+
+                    tmp.innerHTML = body;
+
+
+                }
+                
+            })
+
+        }
+
+
+        let btnDoPut = document.querySelector('#doPut');
+
+        btnDoPut.onclick = function(){
+
+            $.ajax({
+                type:'put',
+                url:'love',
+
+                success: function(body){
+                    
+                    let tmp = document.querySelector('.one');
+
+                    tmp.innerHTML = body;
+
+
+                }
+                
+            })
+
+        }
+
+
+        let btnDoDelete = document.querySelector('#doDelete');
+
+        btnDoDelete.onclick = function(){
+
+            $.ajax({
+                type:'delete',
+                url:'love',
+
+                success: function(body){
+                    
+                    let tmp = document.querySelector('.one');
+
+                    tmp.innerHTML = body;
+
+
+                }
+                
+            })
+
+        }
+
+
+    </script>
+
+
+</body>
+</html>
