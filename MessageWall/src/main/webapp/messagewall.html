@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<style>
+    *{
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+    }
+
+
+    .container{
+
+        width: 800px;
+        margin: 10px auto;
+
+    }
+
+    .container h2{
+
+        text-align: center;
+        margin: 30px 0;
+    }
+
+    .row{
+        height: 50px;
+        display: flex;
+        margin: 12px 0;
+        justify-content: center;
+
+    }
+
+    .row span{
+
+        height: 50px;
+        width: 100px;
+        line-height: 50px;
+    }
+
+    .row input{
+        height: 50px;
+        width: 300px;
+        line-height: 50px;
+        
+    }
+
+    .row button{
+        width: 400px;
+        height: 50px;
+        margin: 10px 0;
+        font-weight: bold;
+        color: white;
+        background-color: rgb(0, 61, 116);
+        border: none;
+
+        border-radius: 10px;
+
+    }
+    
+
+    .row button:active{
+
+        background-color: rgb(174, 208, 238);
+    }
+
+    .row input{
+
+        text-indent: 1em;
+    }
+
+</style>
+
+
+<body>
+    
+
+
+    <div class = "container">
+        <h2>表白墙</h2>
+        
+        <div class = "row">
+            <span><b>谁</b></span>
+            <input type="text" id = "from" placeholder="请输入">
+        </div>
+        
+
+        <div class = "row">
+            <span><b>对谁</b></span>
+            <input type="text" id = "to" placeholder="请输入">
+        </div>
+
+        <div class = "row">
+            <span><b>说什么</b></span>
+            <input type="text" id = "message" placeholder="请输入">
+        </div>
+        
+
+        <div class = "row">
+            <button>提交</button>
+        </div>
+
+    </div>
+
+
+    <script src = "https://code.jquery.com/jquery-3.6.1.min.js"></script>
+
+    <script>
+        
+        let container = document.querySelector('.container')
+        let fromInput = document.querySelector("#from");
+        let toInput = document.querySelector('#to');
+        let messageInput = document.querySelector('#message');
+
+
+        let button = document.querySelector('button');
+        
+
+        button.onclick = function() {
+
+            let from = fromInput.value;
+            let to = toInput.value;
+
+            let message = messageInput.value;
+
+            if (from == '' || to == '' || message == '') {
+                return;
+            }
+
+            let newDiv = document.createElement('div');
+            newDiv.className = 'row';
+            newDiv.style = "font-weight:bold";
+            newDiv.innerHTML = from + "对" + to + "说 " + message;
+
+            container.appendChild(newDiv);
+
+
+            fromInput.value = '';
+            toInput.value = '';
+            messageInput.value = '';
+            
+            let messageJson = {
+                from: from,
+                to: to,
+                message: message
+            }
+
+            $.ajax({
+
+                type: 'post',
+                url: 'message',
+
+                contentType: 'application/json; charset=utf8',
+                //如何构造body?, 创建一个对象把数据都放进去
+                
+                data:JSON.stringify(messageJson),
+                success: function(body){
+                    alert("提交成功!");
+                },
+
+                error: function(){
+                    alert("提交失败");
+                }
+
+            })
+
+
+        }
+
+        function load(){
+            let container = document.querySelector('.container');
+            $.ajax({
+
+                type: 'get',
+                url: "message",
+
+                success: function(body){
+
+                    //注意！！！， 这里的body已经是js对象的数组了， 虽然服务器返回的json格式的字符串，但是ajax会根据
+                    //content-type 为 application/json来对这个字符串进行解析， 解析成js对象。
+
+                    for (let message of body){
+
+                        let newDiv = document.createElement('div');
+                        newDiv.innerHTML = message.from + " 对 " + message.to + " 说 " + message.message;
+                        newDiv.className = 'row';
+                        newDiv.style = "font-weight:bold";
+                        
+                        container.appendChild(newDiv);
+
+                    }
+
+
+                }
+
+            })
+
+        }
+
+        load();
+
+    </script>
+    
+
+</body>
+</html>
