@@ -8,29 +8,34 @@
 </head>
 <body>
     
-<!-- 
+    <input type="text" name = "classId">
+    <input type="text" name = "studentId">
+    <input type="submit" value="提交">
+
     <script src= "https://code.jquery.com/jquery-3.6.1.min.js"></script>
     
+
+
+
     <script>
+
 
         $.ajax({
 
-            type:"get",
-            url:"studentInfo",
+            type: 'post',
+            url: 'studentInfo',
             data: {
                 classId: "104",
                 studentId: "20"
             }
  
+
         })
 
-    </script> -->
 
-    <form action="studentInfo" method="get">
-        <input type="text" name = "classId">
-        <input type="text" name = "studentId">
-        <input type="submit" value="提交">
-    </form>
+    </script>
+
+
 
 
 </body>
