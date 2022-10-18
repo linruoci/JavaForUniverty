@@ -12,6 +12,7 @@
         padding: 0;
         margin: 0;
         box-sizing: border-box;
+        background-color: rgb(238, 234, 217);
     }
 
 
@@ -47,6 +48,7 @@
         height: 50px;
         width: 300px;
         line-height: 50px;
+        border-radius: 20px;
         
     }
 
@@ -140,6 +142,7 @@
             container.appendChild(newDiv);
 
 
+
             fromInput.value = '';
             toInput.value = '';
             messageInput.value = '';
@@ -150,57 +153,65 @@
                 message: message
             }
 
+            
             $.ajax({
 
                 type: 'post',
                 url: 'message',
 
                 contentType: 'application/json; charset=utf8',
-                //如何构造body?, 创建一个对象把数据都放进去
-                
-                data:JSON.stringify(messageJson),
-                success: function(body){
-                    alert("提交成功!");
+
+                data: JSON.stringify(messageJson),
+
+                success: function(){
+
+                    alert("提交成功");
+
                 },
 
                 error: function(){
+
                     alert("提交失败");
+
                 }
+
+                
 
             })
 
+            
+         }
 
-        }
 
-        function load(){
-            let container = document.querySelector('.container');
-            $.ajax({
+         function load(){
+                $.ajax({
 
-                type: 'get',
-                url: "message",
+                    type: 'get',
+                    url: 'message',
 
-                success: function(body){
+                    success: function(body){
+                        let container = document.querySelector('.container');
+                       //注意！， 这里的body已经是js对象的数组了！， 数组里的每一个都是一个键值对，即json数据里的每一个数据源
+                        for(let message of body){
 
-                    //注意！！！， 这里的body已经是js对象的数组了， 虽然服务器返回的json格式的字符串，但是ajax会根据
-                    //content-type 为 application/json来对这个字符串进行解析， 解析成js对象。
+                            let newDiv = document.createElement('div');
 
-                    for (let message of body){
+                            newDiv.className = 'row';
+                            newDiv.style = 'font-weight:bold';
+                            
+                            newDiv.innerHTML = message.from + '对' + message.to + '说' + message.message;
 
-                        let newDiv = document.createElement('div');
-                        newDiv.innerHTML = message.from + " 对 " + message.to + " 说 " + message.message;
-                        newDiv.className = 'row';
-                        newDiv.style = "font-weight:bold";
-                        
-                        container.appendChild(newDiv);
+                            container.appendChild(newDiv);
+
+
+                        }
+
 
                     }
 
 
-                }
-
-            })
-
-        }
+                })
+            }
 
         load();
 

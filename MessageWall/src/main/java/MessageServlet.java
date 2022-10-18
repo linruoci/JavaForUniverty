@@ -46,40 +46,43 @@ public class MessageServlet extends HttpServlet {
     //List<Message> messageList = new ArrayList<>();
 
     //负责实现让客户端从服务器拿到数据
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        //不需要进行任何的解析操作， 直接进行返回即可~
+        //由于请求中不带数据， 因此只需要将我们数据库的文件加载到页面上即可
 
-        resp.setContentType("application/json; charset=utf8");
-
-        //将我们存储的数组进行解析得到一个json字符串。
+        //调用load方法将我们的数据加载到我们的List对象里
         List<Message> messageList = load();
+
         String str = mapper.writeValueAsString(messageList);
 
-        //将这个字符串直接返回即可
-
+        resp.setContentType("application/json; charset=utf8");
         resp.getWriter().write(str);
+
 
     }
 
 
-
     //负责实现客户端提交数据到浏览器
+
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-        //将post请求中的body（json）格式进行读取
+        //读取数据。
         Message message = mapper.readValue(req.getInputStream(), Message.class);
 
-
+        //这里将我们的json数据读取成一个message对象。将其插入到我们的数据库中。
         save(message);
 
-
+        //打印日志.
         System.out.println(message);
 
-        resp.setContentType("application/json; charset=utf8");
-        resp.getWriter().write("{\"ok\":1}");
+        //返回一个ok
+        resp.getWriter().write("{\"ok\": \"1\"}");
+
+
+
 
     }
 
