@@ -1,9 +1,7 @@
 package model;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -77,7 +75,14 @@ public class BlogDao {
                 Blog blog = new Blog();
                 blog.setBlogId(resultSet.getInt("blogId"));
                 blog.setTitle(resultSet.getString("title"));
-                blog.setContent(resultSet.getString("content"));
+
+                String content = resultSet.getString("content");
+                if (content.length() > 100){
+                    content = content.substring(0, 100);
+                }
+
+                blog.setContent(content);
+
                 blog.setUserId(resultSet.getInt("userID"));
                 blog.setPostTime(resultSet.getTimestamp("postTime"));
                 blogs.add(blog);
@@ -118,6 +123,7 @@ public class BlogDao {
                 blog.setTitle(set.getString("title"));
                 blog.setContent(set.getString("content"));
                 blog.setUserId(set.getInt("userId"));
+
                 blog.setPostTime(set.getTimestamp("postTime"));
                 return blog;
 

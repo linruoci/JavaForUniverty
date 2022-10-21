@@ -1,0 +1,32 @@
+.blog-content{
+
+    padding: 30px;
+    
+
+    
+
+
+}
+
+
+.blog-content h3{
+
+    text-align: center;
+
+    padding: 20px 0;
+
+}
+
+.blog-content .date{
+
+    text-align: center;
+    color: rgb(26, 80, 126);
+    padding: 10px 0;
+    font-weight: bold;
+}
+
+.blog-content p{
+
+    text-indent: 2em;
+    line-height: 22px;
+}

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/blog-detail.css">
+</head>
+<body>
+    <!-- 导航栏 -->
+    <div class = "nav">
+
+        <img src="../imgae/beauty.jpg" alt="">
+
+        <span class = "title">我的博客系统</span>   
+
+        <!-- 这个spacer用来占位 -->
+        <span class = "spacer"></span>
+
+        <a href="blog-list.html">主页</a>
+
+        <a href="blog-edit.html">写博客</a>
+
+        <a href="#">注销</a>
+
+
+
+    </div>
+
+    <div class="container">
+
+        <!-- 左侧个人信息 -->
+        <div class="container-left">
+
+            <div class="card">
+                <img src="../imgae/doge.jpg" alt="">
+                
+                <h3>林若词</h3>
+
+                <a href="#">我的github地址</a>
+
+                <div class="counter">
+                    <span>
+                        文章
+                    </span>
+                    <span>分类</span>
+                </div>
+
+                <div class="counter">
+
+                    <span>2</span>
+                    <span>3</span>
+                </div>
+
+
+            </div>
+
+        </div> 
+
+
+        <!-- 右侧内容详情 -->
+        <div class="container-right">
+
+            
+            <div class="blog-content">
+
+                <h3></h3>
+
+                <div class="date">
+                </div>
+
+
+                <div id = "content">
+                 
+                    
+                </div>
+
+
+
+            </div>
+
+
+
+        </div>
+
+
+    </div>
+
+
+    <script src = ../js/jquery.min.js></script>
+    
+    <script>
+        function getBlog(){
+
+            $.ajax({
+
+                type: 'get',
+                url: '../blog' + location.search,
+                success: function(body){
+
+                    let h3 = document.querySelector('.blog-content h3');
+                    h3.innerHTML = body.title;
+
+                    let date = document.querySelector('.blog-content .date')
+                    date.innerHTML = body.postTime;
+                    
+                    let content = document.querySelector('#content')
+                    content.innerHTML = body.content;
+                }
+
+
+
+            })
+
+        }
+        getBlog();
+    </script>
+
+
+</body>
+</html>

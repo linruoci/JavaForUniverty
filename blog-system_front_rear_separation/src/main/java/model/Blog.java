@@ -1,6 +1,7 @@
 package model;
 
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 
 /**
  * @DATE: 2022/10/20 0:18
@@ -48,8 +49,13 @@ public class Blog {
         this.userId = userId;
     }
 
-    public Timestamp getPostTime() {
-        return postTime;
+    public String getPostTime() {
+
+
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        return format.format(this.postTime);
+
+
     }
 
     public void setPostTime(Timestamp postTime) {
