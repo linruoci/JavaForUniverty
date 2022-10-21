@@ -25,7 +25,7 @@ public class UserDao {
         try {
             connection = DBUtil.getConnection();
 
-            String sql = "select * from user where password = ?";
+            String sql = "select * from user where username = ?";
             statement = connection.prepareStatement(sql);
             statement.setString(1, userName);
 
