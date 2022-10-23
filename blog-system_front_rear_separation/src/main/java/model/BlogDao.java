@@ -19,16 +19,18 @@ public class BlogDao {
 
     //新增一篇博客
     //此处的Blog是前端提交给后端的。
-    public void insert(Blog blog){
+    public int insert(Blog blog){
         Connection connection = null;
         PreparedStatement statement = null;
+        ResultSet resultSet = null;
+        int key = 0;
         try {
             //1.建立连接
             connection = DBUtil.getConnection();
 
             //2. 构造sql语句
             String str = "insert into blog values(null, ?, ?, ?, now())";
-            statement = connection.prepareStatement(str);
+            statement = connection.prepareStatement(str, Statement.RETURN_GENERATED_KEYS);
             //这里计算的是第几个问号
             statement.setString(1, blog.getTitle());
             statement.setString(2, blog.getContent());
@@ -37,6 +39,13 @@ public class BlogDao {
             
             //3.执行sql语句
             int n = statement.executeUpdate();
+            resultSet = statement.getGeneratedKeys();
+
+            if (resultSet.next()){
+
+                key = resultSet.getInt(1);
+
+            }
 
             if (n != 1){
                 System.out.println("插入失败");
@@ -47,8 +56,9 @@ public class BlogDao {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
-            DBUtil.close(connection, statement, null);
+            DBUtil.close(connection, statement, resultSet);
         }
+        return key;
 
     }
 
@@ -63,9 +73,8 @@ public class BlogDao {
             connection = DBUtil.getConnection();
 
             //2.构造sql语句
-            String sql = "select * from blog";
+            String sql = "select * from blog order by postTime desc";
             statement = connection.prepareStatement(sql);
-
             //3.执行sql语句
             resultSet = statement.executeQuery();
 

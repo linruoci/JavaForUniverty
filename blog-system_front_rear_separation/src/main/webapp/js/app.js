@@ -1,4 +1,4 @@
-function checkBlog(){
+function checkLogin(){
 
     $.ajax({
         type: 'get',

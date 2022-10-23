@@ -43,5 +43,15 @@
 
     </dependencies>
 
+    <packaging>
+        war
+    </packaging>
+
+    <build>
+        <finalName>
+            blog-system
+        </finalName>
+    </build>
+
 
 </project>

@@ -12,6 +12,16 @@ public class User {
     private String username;
     private String password;
 
+    private int isYourBlog;
+
+    public int getIsYourBlog() {
+        return isYourBlog;
+    }
+
+    public void setIsYourBlog(int isYourBlog) {
+        this.isYourBlog = isYourBlog;
+    }
+
     public int getUserId() {
         return userId;
     }

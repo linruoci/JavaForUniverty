@@ -30,9 +30,7 @@
 
         <a href="blog-edit.html">写博客</a>
 
-        <a href="#">注销</a>
-
-
+        <a href="../logout">注销</a>
 
     </div>
 
@@ -118,7 +116,7 @@
                     // content.innerHTML = body.content;
 
                     //很重要!! editor.md提供的一个方法把markdown字符串转换成格式化的结果
-                    //第一个参数表示div的id， 表示要把渲染结果放到哪个div中
+                    //第 一个参数表示div的id， 表示要把渲染结果放到哪个div中
                     editormd.markdownToHTML('content', {
                         markdown: body.content
                     })
@@ -131,8 +129,41 @@
 
         }
         getBlog();
-        //验证登录
-        checkBlog();
+
+        function getUserInfo(){
+            
+            $.ajax({
+                type: 'get',
+                url: '../userInfo' + location.search,
+
+                success: function(body){
+                    let h3 = document.querySelector(".card h3");
+
+                    h3.innerHTML = body.username;
+                    
+                    let a = document.querySelector('#delete');
+
+                    if (body.isYourBlog){
+                        let deleteA = document.createElement('a');
+                        //location.search就是当前博客的博客id
+                        deleteA.href = '../blogDelete' + location.search;
+                        
+                        deleteA.innerHTML = '删除';
+
+                        let nav = document.querySelector(".nav");
+                        nav.appendChild(deleteA);
+
+                    } 
+
+
+
+                }
+            })
+
+        }
+
+        getUserInfo();
+
     </script>
 
 

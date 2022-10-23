@@ -3,12 +3,14 @@ package Controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import model.Blog;
 import model.BlogDao;
+import model.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -52,6 +54,46 @@ public class BlogServlet extends HttpServlet {
 
 
 
+    }
+
+
+    //这个请求在这里提交一篇博客
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.setCharacterEncoding("utf8");
+        BlogDao blogDao = new BlogDao();
+        Blog blog = new Blog();
+        String title = req.getParameter("title");
+        String content = req.getParameter("content");
+
+        HttpSession session = req.getSession();
+        if (session == null){
+            resp.setStatus(403);
+            return;
+        }
+
+        User user = (User) session.getAttribute("user");
+        if (user == null){
+            resp.setStatus(403);
+            return;
+        }
+
+
+        if (title == null || content == null || "".equals(title) || "".equals("content")){
+            resp.setStatus(400);
+            resp.setContentType("text/html; charset=utf9");
+            resp.getWriter().write("请求中的标题或正文为空。");
+            return;
+        }
+
+        blog.setTitle(title);
+        blog.setContent(content);
+        blog.setUserId(user.getUserId());
+
+        int blogId = blogDao.insert(blog);
+        //插入成功之后， 返回博客列表页
+        String str = "html/blog-detail.html?blogId="+blogId;
+        resp.sendRedirect(str);
 
 
     }

@@ -20,29 +20,35 @@ import java.io.IOException;
  * @author: 帅哥
  * @DESCRIPTION:
  */
-@WebServlet("userInfo")
+@WebServlet("/userInfo")
 public class UserInfoServlet extends HttpServlet {
     private  ObjectMapper mapper = new ObjectMapper();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String blogId = req.getParameter("blogId");
         //这里如果是null，说明在我们的博客列表页， 此时查找登录用户的个人信息
+
+
+        HttpSession session = req.getSession(false);
+
+        if (session == null){
+            resp.setStatus(403);
+            resp.setContentType("text/html;charset=utf8");
+            resp.getWriter().write("当前未登录!");
+            return;
+        }
+
+        User user = (User) session.getAttribute("user");
+        if (user == null){
+            resp.setStatus(403);
+            resp.setContentType("text/html;charset=utf8");
+            resp.getWriter().write("当前未登录!");
+            return;
+        }
+
         if (blogId == null){
-            HttpSession session = req.getSession(false);
 
-            if (session == null){
-                resp.setContentType("text/html;charset=utf8");
-                resp.getWriter().write("当前未登录!");
-                return;
-            }
-
-            User user = (User) session.getAttribute("user");
-            if (user == null){
-
-                resp.setContentType("text/html;charset=utf8");
-                resp.getWriter().write("当前未登录!");
-                return;
-            }
+            user.setPassword("");
             resp.setContentType("application/json;charset=utf8");
             String s = mapper.writeValueAsString(user);
             resp.getWriter().write(s);
@@ -61,17 +67,22 @@ public class UserInfoServlet extends HttpServlet {
 
             UserDao userDao = new UserDao();
             int userId = blog.getUserId();
+            //博客的作者
+            User author = userDao.selectById(userId);
 
-            User user = userDao.selectById(userId);
-
-            if (user == null){
+            if (author == null){
                 resp.setContentType("text/html;charset=utf8");
                 resp.getWriter().write("没找到当前作者!");
                 return;
             }
-
+            author.setPassword("");
+            if (user.getUserId() == author.getUserId()){
+                author.setIsYourBlog(1);
+            } else {
+                author.setIsYourBlog(0);
+            }
             resp.setContentType("application/json;charset=utf8");
-            String s = mapper.writeValueAsString(user);
+            String s = mapper.writeValueAsString(author);
             resp.getWriter().write(s);
 
         }
