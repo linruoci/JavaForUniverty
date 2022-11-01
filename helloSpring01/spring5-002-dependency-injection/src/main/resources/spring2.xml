@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <bean id="userDao" class="userdao.UserDao"/>
+    <bean id="vipDao" class="userdao.VipDao"/>
+    <bean id="csbean1" class="service.CustomerService">
+        <!-- 通过构造方法来注入 -->
+        <constructor-arg index="0" ref="vipDao"/>
+        <constructor-arg index="1" ref="userDao"/>
+    </bean>
+
+
+    <bean id="student" class="service.bean.Student">
+        <property name="name" value="张三"/>
+        <property name="clazz" ref="clazz"/>
+        <property name="clazz.name" value="高三一班"/>
+    </bean>
+
+    <bean id="clazz" class="service.bean.Clazz"></bean>
+
+
+    <bean id="csbean2" class="service.CustomerService">
+
+        <constructor-arg name="userDao" ref="userDao"/>
+        <constructor-arg name="vipDao" ref="vipDao"/>
+    </bean>
+
+
+    <bean id="simpleValue" class="service.bean.SimpleValueType">
+        <property name="age" value="18"/>
+        <property name="age2" value="20"/>
+        <property name="c" value="难"/>
+        <property name="c2" value="女"/>
+        <property name="clazz" value="java.lang.String"/>
+        <property name="flag" value="false"/>
+        <property name="flag2" value="true"/>
+        <property name="name" value="zhangsan"/>
+        <property name="season" value="SPRING"/>
+    </bean>
+
+
+
+</beans>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!--对数组进行注入-->
+    <bean id="guys" class="service.bean.Guys">
+        <property name="hobbies">
+            <array>
+                <value>抽烟</value>
+                <value>喝酒</value>
+                <value>烫头</value>
+
+            </array>
+        </property>
+
+        <property name="womens">
+            <array>
+                <ref bean="woman1"/>
+                <ref bean="woman2"/>
+                <ref bean="woman3"/>
+            </array>
+        </property>
+
+    </bean>
+
+
+    <bean id="woman1" class="service.bean.Woman">
+        <property name="name" value="小红"/>
+    </bean>
+
+    <bean id="woman2" class="service.bean.Woman">
+        <property name="name" value="小绿"/>
+    </bean>
+
+    <bean id="woman3" class="service.bean.Woman">
+        <property name="name" value="小黄"/>
+    </bean>
+
+
+
+
+</beans>
