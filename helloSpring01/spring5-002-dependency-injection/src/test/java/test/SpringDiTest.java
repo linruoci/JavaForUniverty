@@ -1,14 +1,14 @@
 package test;
 
+import jdbc.DBUtil;
+import jdbc.DBUtil1;
+import jdbc.DBUtil2;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import service.CustomerService;
 import service.UserService;
-import service.bean.Clazz;
-import service.bean.Guys;
-import service.bean.SimpleValueType;
-import service.bean.Student;
+import service.bean.*;
 
 /**
  * @DATE: 2022/10/30 13:34
@@ -17,6 +17,53 @@ import service.bean.Student;
  * @DESCRIPTION:
  */
 public class SpringDiTest {
+
+
+    @Test
+    public void testProperties(){
+        ApplicationContext context = new ClassPathXmlApplicationContext("spring-properties.xml");
+        DBUtil ds = context.getBean("db", DBUtil.class);
+        System.out.println(ds);
+
+
+    }
+
+
+    @Test
+    public void testUtil(){
+        ApplicationContext context = new ClassPathXmlApplicationContext("spring-util.xml");
+        DBUtil1 ds1 = context.getBean("ds1", DBUtil1.class);
+        System.out.println(ds1);
+
+        DBUtil2 ds2 = context.getBean("ds2", DBUtil2.class);
+        System.out.println(ds2);
+
+
+    }
+
+    @Test
+    public void testAutoWire(){
+        ApplicationContext context = new ClassPathXmlApplicationContext("spring-autowire.xml");
+        UserService userService = context.getBean("userService", UserService.class);
+        userService.savaMessage();
+    }
+
+    @Test
+    public void testP(){
+
+        ApplicationContext context = new ClassPathXmlApplicationContext("spring-p.xml");
+        Dog dogBean = context.getBean("dogBean", Dog.class);
+        System.out.println(dogBean);
+
+    }
+
+
+    @Test
+    public void testCollectionInsert(){
+        ApplicationContext context = new ClassPathXmlApplicationContext("spring-collection.xml");
+        Person personBean = context.getBean("personBean", Person.class);
+        System.out.println(personBean);
+    }
 
     @Test
     public void testArrayInsert(){

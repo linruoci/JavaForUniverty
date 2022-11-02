@@ -13,11 +13,19 @@ import org.slf4j.LoggerFactory;
  */
 public class UserDao {
 
-    private static final Logger logger = LoggerFactory.getLogger(UserDao.class);
+    private UserDao userDao;
 
-    public void insert(){
-        //log4j日志框架
-        logger.info("数据库正在保存用户信息");
+    public void setUserDao(UserDao userDao) {
+        this.userDao = userDao;
     }
+
+    public void generate(){
+
+        System.out.println("正在生成订单");
+
+    }
+
+
+
 
 }

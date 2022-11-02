@@ -12,16 +12,13 @@ import userdao.VipDao;
 public class CustomerService {
 
     private VipDao vipDao;
-    private UserDao userDao;
 
-    public CustomerService(VipDao vipDao, UserDao userDao) {
+    public CustomerService(VipDao vipDao) {
         this.vipDao = vipDao;
-        this.userDao = userDao;
     }
 
     public void save(){
         vipDao.save();
-        userDao.insert();
     }
 
 

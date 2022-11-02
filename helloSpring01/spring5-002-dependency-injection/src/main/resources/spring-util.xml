@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+
+    <util:properties id="prop">
+        <prop key="url">jdbc:mysql://127.0.0.1:3306/java104?characterEncoding=utf8&amp;useSSL=false</prop>
+        <prop key="user">root</prop>
+        <prop key="password">123</prop>
+    </util:properties>
+
+    <bean id="ds1" class="jdbc.DBUtil1">
+        <property name="properties" ref="prop">
+
+        </property>
+    </bean>
+
+    <bean id="ds2" class="jdbc.DBUtil2">
+        <property name="properties" ref="prop">
+
+        </property>
+    </bean>
+
+
+</beans>

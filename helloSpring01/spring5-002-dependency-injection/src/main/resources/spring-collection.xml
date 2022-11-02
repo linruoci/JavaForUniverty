@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    
+    <bean id="personBean" class="service.bean.Person">
+
+        <property name="properties">
+            <props>
+                <prop key="url">jdbc:mysql://127.0.0.1:3306/java104?characterEncoding-utf8&amp;useSSL=flase</prop>
+                <prop key="user">root</prop>
+                <prop key="password">123</prop>
+            </props>
+        </property>
+
+
+        <property name="map">
+            <map>
+                <entry key="1" value="110"/>
+                <entry key="2" value="111"/>
+                <entry key="3" value="222"/>
+                <entry key="4" value="333"/>
+            </map>
+        </property>
+
+        <property name="names">
+            <!---->
+            <list>
+                <ref bean="woman1"/>
+                <ref bean="woman2"/>
+                <ref bean="woman3"/>
+            </list>
+        </property>
+
+        <property name="addresss">
+            <set>
+                <value>北京</value>
+                <value>上海</value>
+                <value>广州</value>
+                <value>深圳</value>
+            </set>
+        </property>
+
+    </bean>
+
+    <bean id="woman1" class="service.bean.Woman">
+        <property name="name" value="小红"/>
+    </bean>
+
+    <bean id="woman2" class="service.bean.Woman">
+        <property name="name" value="小绿"/>
+    </bean>
+
+    <bean id="woman3" class="service.bean.Woman">
+        <property name="name" value="小黄"/>
+    </bean>
+    
+</beans>
